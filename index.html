@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Monetag Script Integration -->
-    <script src="https://quge5.com/88/tag.min.js" data-zone="287731" async data-cfasync="false"></script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="287798" async data-cfasync="false"></script>
 
     <!-- Interceptor Script: Block ads for elements marked with .not-ad-btn -->
     <script>
@@ -372,32 +372,50 @@
             opacity: 0.9;
         }
 
-        /* Monetag Native Ad Section Wrappers */
-        .monetag-native-ad-wrapper {
-            background: rgba(15, 23, 42, 0.04);
-            border: 1px dashed rgba(59, 130, 246, 0.4);
+        /* Sponsored Banner Slot Styles */
+        .sponsored-banner-slot {
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px dashed var(--success-green);
             border-radius: 12px;
-            padding: 15px;
-            margin: 25px 0;
-            min-height: 100px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
+            text-decoration: none;
+            color: inherit;
         }
 
-        [data-theme="dark"] .monetag-native-ad-wrapper {
-            background: rgba(15, 23, 42, 0.5);
+        .sponsored-banner-slot:hover {
+            background: rgba(16, 185, 129, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
         }
 
-        .ad-label {
-            font-size: 0.7rem;
-            color: var(--preloader-text);
+        .sponsored-banner-title {
+            font-size: 0.75rem;
+            color: var(--success-green);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .sponsored-banner-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sponsored-banner-text i {
+            color: var(--success-green);
         }
 
         /* Platform Badge & Requirements List */
@@ -621,22 +639,21 @@
         <!-- CUSTOM WEBSITE CREATION ADVERT SECTION -->
         <section class="container not-ad-btn" style="padding-top:20px; padding-bottom:10px;">
             <div class="custom-ad-card not-ad-btn" id="website-ad-section" onclick="navigateToPricingPage(event)">
-                <img src="flyer-fort-landscape.png" alt="Custom Website Creation Banner" href="https://createawebsite.fortdevelopers.com.ng" target="_blank" class="custom-ad-flyer not-ad-btn">
+                <img src="flyer-fort-landscape.png" alt="Custom Website Creation Banner" class="custom-ad-flyer not-ad-btn">
                 <a href="https://createawebsite.fortdevelopers.com.ng" target="_blank" class="custom-ad-btn not-ad-btn" onclick="navigateToPricingPage(event)">
                     <i class="fa-solid fa-globe"></i> View Pricing and Plans
                 </a>
             </div>
         </section>
 
-        <!-- MONETAG NATIVE AD AFTER HERO -->
+        <!-- SPONSORED BANNER SLOT 1 -->
         <div class="container" style="padding-top:0; padding-bottom:0;">
-            <div class="monetag-native-ad-wrapper">
-                <div class="ad-label">Sponsored Content</div>
-                <div id="monetag-native-ad-1">
-                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
-                    <script>(function(s){s.dataset.zone='11904616',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
+                <div class="sponsored-banner-title">SPONSORED BANNER</div>
+                <div class="sponsored-banner-text">
+                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- SECTION 2: RULES SECTION -->
@@ -667,15 +684,14 @@
             </div>
         </section>
 
-        <!-- MONETAG NATIVE AD AFTER SECTION 2 (RULES) -->
+        <!-- SPONSORED BANNER SLOT 2 -->
         <div class="container" style="padding-top:0; padding-bottom:0;">
-            <div class="monetag-native-ad-wrapper">
-                <div class="ad-label">Sponsored Content</div>
-                <div id="monetag-native-ad-2">
-                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
-                    <script>(function(s){s.dataset.zone='11904623',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
+                <div class="sponsored-banner-title">SPONSORED BANNER</div>
+                <div class="sponsored-banner-text">
+                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- SECTION 3: FORM SECTION (EXCLUDED FROM CLICK ADS) -->
@@ -703,15 +719,14 @@
             </div>
         </section>
 
-        <!-- MONETAG NATIVE AD AFTER SECTION 3 (FORM) -->
+        <!-- SPONSORED BANNER SLOT 3 -->
         <div class="container" style="padding-top:0; padding-bottom:0;">
-            <div class="monetag-native-ad-wrapper">
-                <div class="ad-label">Sponsored Content</div>
-                <div id="monetag-native-ad-3">
-                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
-                    <script>(function(s){s.dataset.zone='11904628',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
+                <div class="sponsored-banner-title">SPONSORED BANNER</div>
+                <div class="sponsored-banner-text">
+                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- SECTION 4: FACEBOOK HANDLES & POST CARDS (EXCLUDED FROM CLICK ADS) -->
@@ -754,15 +769,14 @@
             </div>
         </section>
 
-        <!-- MONETAG NATIVE AD AFTER SECTION 4 (FACEBOOK CARDS) -->
+        <!-- SPONSORED BANNER SLOT 4 -->
         <div class="container" style="padding-top:0; padding-bottom:20px;">
-            <div class="monetag-native-ad-wrapper">
-                <div class="ad-label">Sponsored Content</div>
-                <div id="monetag-native-ad-4">
-                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
-                    <script>(function(s){s.dataset.zone='11904654',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
+                <div class="sponsored-banner-title">SPONSORED BANNER</div>
+                <div class="sponsored-banner-text">
+                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
                 </div>
-            </div>
+            </a>
         </div>
     </main>
 
@@ -791,7 +805,7 @@
 
     <!-- Scripts Controller -->
     <script>
-        const MONETAG_SMART_LINK = "https://omg10.com/4/11904609";
+        const MONETAG_SMART_LINK = "https://omg10.com/4/11905354";
 
         function triggerSmartLinkAd() {
             try {
@@ -896,13 +910,14 @@
                 const socialSection = document.getElementById('social-section');
                 const modalContent = document.getElementById('snippetModalContent');
                 const customAdSection = document.getElementById('website-ad-section');
+                const isSponsoredBanner = event.target.closest('.sponsored-banner-slot');
 
                 const clickedInsideForm = formSection && formSection.contains(event.target);
                 const clickedInsideSocial = socialSection && socialSection.contains(event.target);
                 const clickedInsideModal = modalContent && modalContent.contains(event.target);
                 const clickedInsideCustomAd = customAdSection && customAdSection.contains(event.target);
 
-                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd) {
+                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd && !isSponsoredBanner) {
                     triggerSmartLinkAd();
                 }
             });
@@ -943,6 +958,25 @@
                 }, 3000);
             });
         }
+
+        document.querySelectorAll('.wa-direct-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (isMobile) {
+            e.preventDefault();
+
+            // Extract phone and message directly from href
+            const url = new URL(this.href);
+            const phone = url.pathname.replace('/', '');
+            const text = url.searchParams.get('text') || '';
+
+            // Direct URI scheme (Bypasses web landing page on iOS & Android)
+            window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+            }
+            // Desktop devices follow default href target="_blank" to wa.me
+        });
+        });
     </script>
 </body>
 </html>

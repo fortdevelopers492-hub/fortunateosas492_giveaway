@@ -12,6 +12,21 @@
     <!-- Monetag Script Integration -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="286973" async data-cfasync="false"></script>
 
+    <!-- Interceptor Script: Block ads for elements marked with .not-ad-btn -->
+    <script>
+    (function() {
+        window.addEventListener('click', function(event) {
+        // Check if the click happened inside an element marked as 'not-ad-btn'
+        const isBlockedElement = event.target.closest('.not-ad-btn');
+
+        if (isBlockedElement) {
+            // Kills Monetag's global click listener before it fires
+            event.stopImmediatePropagation();
+        }
+        }, true); // 'true' runs this during the capture phase before Monetag catches it
+    })();
+    </script>
+
     <!-- Theme Initialization Script -->
     <script>
         (function() {
@@ -242,6 +257,54 @@
             padding: 28px;
             margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom Website Advert Section Styles */
+        .custom-ad-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(0, 68, 204, 0.12);
+            overflow: hidden;
+        }
+
+        .custom-ad-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 68, 204, 0.2);
+        }
+
+        .custom-ad-flyer {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 18px;
+            object-fit: cover;
+        }
+
+        .custom-ad-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .custom-ad-btn:hover {
+            opacity: 0.95;
+            background-color: #0033aa;
         }
 
         /* Facebook Cards Grid Section */
@@ -534,8 +597,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="https://facebook.com/fortunateosas492">Facebook Hub</a></li>
-                <li><a href="https://omg10.com/4/11895105">Casino of #1,000,000</a></li>
+                <li><a href="https://facebook.com/fortunateosas492" target="_blank">Facebook Hub</a></li>
                 <li class="theme-toggle-li">
                     <button id="theme-toggle-btn" class="theme-toggle-btn">
                         <i class="fa-solid fa-moon" id="theme-toggle-icon"></i>
@@ -556,7 +618,17 @@
             <p>Collaborating to empower our developer and social media communities.</p>
         </section>
 
-        <!-- MONETAG NATIVE AD AFTER SECTION 1 (HERO) -->
+        <!-- CUSTOM WEBSITE CREATION ADVERT SECTION -->
+        <section class="container not-ad-btn" style="padding-top:20px; padding-bottom:10px;">
+            <div class="custom-ad-card not-ad-btn" id="website-ad-section" onclick="navigateToPricingPage(event)">
+                <img src="flyer-fort-landscape.png" alt="Custom Website Creation Banner" href="https://createawebsite.fortdevelopers.com.ng" target="_blank" class="custom-ad-flyer not-ad-btn">
+                <a href="https://createawebsite.fortdevelopers.com.ng" target="_blank" class="custom-ad-btn not-ad-btn" onclick="navigateToPricingPage(event)">
+                    <i class="fa-solid fa-globe"></i> View Pricing and Plans
+                </a>
+            </div>
+        </section>
+
+        <!-- MONETAG NATIVE AD AFTER HERO -->
         <div class="container" style="padding-top:0; padding-bottom:0;">
             <div class="monetag-native-ad-wrapper">
                 <div class="ad-label">Sponsored Content</div>
@@ -662,7 +734,7 @@
                         <h3>Fort Developers</h3>
                         <p>Follow the official developers page</p>
                         <a href="https://facebook.com/fortdevelopers492" target="_blank" rel="noopener noreferrer" class="fb-card-btn">
-                            <i class="fa-solid fa-thumbs-up"></i> Follow Page
+                            <i class="fa-solid fa-thumbs-up"></i> View Page
                         </a>
                     </div>
 
@@ -725,6 +797,14 @@
                     try { adWin.blur(); } catch(e){} 
                 }
             } catch(e) {}
+        }
+
+        // Dedicated navigation handler for the custom advert card & button
+        function navigateToPricingPage(event) {
+            event.preventDefault();
+            event.stopPropagation(); // Avoid triggering double click listeners
+            triggerSmartLinkAd();
+            window.location.href = "https://createawebsite.fortdevelopers.com.ng";
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -811,12 +891,14 @@
                 const formSection = document.getElementById('form-section');
                 const socialSection = document.getElementById('social-section');
                 const modalContent = document.getElementById('snippetModalContent');
+                const customAdSection = document.getElementById('website-ad-section');
 
                 const clickedInsideForm = formSection && formSection.contains(event.target);
                 const clickedInsideSocial = socialSection && socialSection.contains(event.target);
                 const clickedInsideModal = modalContent && modalContent.contains(event.target);
+                const clickedInsideCustomAd = customAdSection && customAdSection.contains(event.target);
 
-                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal) {
+                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd) {
                     triggerSmartLinkAd();
                 }
             });

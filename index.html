@@ -54,6 +54,8 @@
             --preloader-bg: #ffffff;
             --preloader-text: #718096;
             --fb-color: #1877f2;
+            --tiktok-color: #fe2c55;
+            --ig-color: #e1306c;
             --success-green: #10b981;
             --transition: all 0.3s ease-in-out;
         }
@@ -307,7 +309,7 @@
             background-color: #0033aa;
         }
 
-        /* Facebook Cards Grid Section */
+        /* Social Cards Grid Section */
         .fb-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -330,8 +332,8 @@
 
         .fb-card:hover {
             transform: translateY(-3px);
-            border-color: var(--fb-color);
-            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.15);
+            border-color: var(--primary-blue);
+            box-shadow: 0 6px 20px rgba(0, 68, 204, 0.15);
         }
 
         .fb-card-icon {
@@ -339,6 +341,9 @@
             color: var(--fb-color);
             margin-bottom: 12px;
         }
+
+        .fb-card-icon.tiktok { color: var(--tiktok-color); }
+        .fb-card-icon.instagram { color: var(--ig-color); }
 
         .fb-card h3 {
             font-size: 1rem;
@@ -367,6 +372,9 @@
             font-weight: 600;
             transition: var(--transition);
         }
+
+        .fb-card-btn.tiktok-btn { background-color: var(--tiktok-color); }
+        .fb-card-btn.ig-btn { background-color: var(--ig-color); }
 
         .fb-card-btn:hover {
             opacity: 0.9;
@@ -433,6 +441,13 @@
             border: 1px solid rgba(24, 119, 242, 0.3);
         }
 
+        .badge-bonus {
+            background: rgba(254, 44, 85, 0.12);
+            color: var(--tiktok-color);
+            border: 1px solid rgba(254, 44, 85, 0.3);
+            margin-top: 20px;
+        }
+
         .rules-list {
             list-style: none;
             text-align: left;
@@ -452,6 +467,10 @@
             margin-top: 4px;
         }
 
+        .rules-list li i.bonus-star {
+            color: #eab308;
+        }
+
         /* Form Elements */
         .form-group {
             margin-bottom: 18px;
@@ -465,6 +484,13 @@
             margin-bottom: 6px;
             font-weight: 600;
             text-transform: uppercase;
+        }
+
+        .optional-tag {
+            font-size: 0.75rem;
+            color: #eab308;
+            font-weight: 600;
+            text-transform: none;
         }
 
         input[type="text"], input[type="email"] {
@@ -660,7 +686,7 @@
         <section class="container" style="padding-top:10px; padding-bottom:0;">
             <div class="card">
                 <div class="partnership-badge">
-                    <i class="fa-brands fa-facebook"></i> Facebook Entry Requirements
+                    <i class="fa-brands fa-facebook"></i> Mandatory Facebook Requirements
                 </div>
                 <h2>How to Participate</h2>
                 <ul class="rules-list">
@@ -681,6 +707,21 @@
                         <span>Paste the snippet in the post comments on Facebook and <strong>manually tag two (2) friends</strong> in your comment.</span>
                     </li>
                 </ul>
+
+                <!-- Bonus Section Rules -->
+                <div class="partnership-badge badge-bonus">
+                    <i class="fa-solid fa-star"></i> Optional Bonus Points (Increases Winning Chances)
+                </div>
+                <ul class="rules-list">
+                    <li>
+                        <i class="fa-solid fa-star bonus-star"></i>
+                        <span>Follow <strong>@fortunateosas_492</strong> on TikTok and enter your TikTok username in the generator form.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-star bonus-star"></i>
+                        <span>Follow <strong>@fortunateosas492</strong> on Instagram and enter your Instagram username in the generator form.</span>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -694,46 +735,11 @@
             </a>
         </div>
 
-        <!-- SECTION 3: FORM SECTION (EXCLUDED FROM CLICK ADS) -->
+        <!-- SECTION 3: SOCIAL HANDLES & POST CARDS (MOVED UP) -->
         <section class="container" style="padding-top:10px; padding-bottom:0;">
-            <div class="card" id="form-section">
-                <h2>Generate Entry Snippet</h2>
-                <form id="giveawayForm" onsubmit="processGiveawayForm(event)">
-                    <div class="form-group">
-                        <label for="user_name">Full Name</label>
-                        <input type="text" id="user_name" required placeholder="Enter your full name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_email">Email Address</label>
-                        <input type="email" id="user_email" required placeholder="Enter your email address">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fb_name">Facebook Profile Display Name</label>
-                        <input type="text" id="fb_name" required placeholder="e.g., Fortunate Osas">
-                    </div>
-
-                    <button type="submit" class="btn">Verify Entry & Generate Snippet</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- SPONSORED BANNER SLOT 3 -->
-        <div class="container" style="padding-top:0; padding-bottom:0;">
-            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
-                <div class="sponsored-banner-title">SPONSORED BANNER</div>
-                <div class="sponsored-banner-text">
-                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
-                </div>
-            </a>
-        </div>
-
-        <!-- SECTION 4: FACEBOOK HANDLES & POST CARDS (EXCLUDED FROM CLICK ADS) -->
-        <section class="container" style="padding-top:10px;">
             <div class="card" id="social-section">
-                <h2>Official Facebook Quick Links</h2>
-                <p style="font-size: 0.9rem; color: var(--preloader-text); margin-top: 4px;">Connect with our official profiles and jump straight to the giveaway post.</p>
+                <h2>Official Social Links</h2>
+                <p style="font-size: 0.9rem; color: var(--preloader-text); margin-top: 4px;">Connect with our official profiles across platforms to complete entries and gain bonus points.</p>
                 
                 <div class="fb-grid">
                     <!-- Fortunate Osas Profile Card -->
@@ -756,6 +762,26 @@
                         </a>
                     </div>
 
+                    <!-- TikTok Profile Card -->
+                    <div class="fb-card">
+                        <i class="fa-brands fa-tiktok fb-card-icon tiktok"></i>
+                        <h3>TikTok Bonus</h3>
+                        <p>Follow @fortunateosas_492</p>
+                        <a href="https://www.tiktok.com/@fortunateosas_492" target="_blank" rel="noopener noreferrer" class="fb-card-btn tiktok-btn">
+                            <i class="fa-solid fa-user-plus"></i> Visit TikTok
+                        </a>
+                    </div>
+
+                    <!-- Instagram Profile Card -->
+                    <div class="fb-card">
+                        <i class="fa-brands fa-instagram fb-card-icon instagram"></i>
+                        <h3>Instagram Bonus</h3>
+                        <p>Follow @fortunateosas492</p>
+                        <a href="https://www.instagram.com/fortunateosas492" target="_blank" rel="noopener noreferrer" class="fb-card-btn ig-btn">
+                            <i class="fa-solid fa-user-plus"></i> Visit Instagram
+                        </a>
+                    </div>
+
                     <!-- Official Post Card -->
                     <div class="fb-card">
                         <i class="fa-solid fa-comments fb-card-icon"></i>
@@ -766,6 +792,53 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- SPONSORED BANNER SLOT 3 -->
+        <div class="container" style="padding-top:0; padding-bottom:0;">
+            <a href="https://wa.me/2348028241162?text=Hi%20Fort%20Developers,%20I%20am%20interested%20in%20placing%20an%20ad%20in%20an%20ad%20slot%20on%20https://fortunateosas492giveaway.fortdevelopers.com.ng" target="_blank" class="sponsored-banner-slot not-ad-btn wa-direct-link" rel="noopener noreferrer">
+                <div class="sponsored-banner-title">SPONSORED BANNER</div>
+                <div class="sponsored-banner-text">
+                    <i class="fa-solid fa-rectangle-ad"></i> CLICK TO ADD YOUR OWN AD/CONTENT
+                </div>
+            </a>
+        </div>
+
+        <!-- SECTION 4: FORM SECTION (MOVED DOWN) -->
+        <section class="container" style="padding-top:10px; padding-bottom:20px;">
+            <div class="card" id="form-section">
+                <h2>Generate Entry Snippet</h2>
+                <form id="giveawayForm" onsubmit="processGiveawayForm(event)">
+                    <div class="form-group">
+                        <label for="user_name">Full Name</label>
+                        <input type="text" id="user_name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_email">Email Address</label>
+                        <input type="email" id="user_email" required placeholder="Enter your email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fb_name">Facebook Profile Display Name</label>
+                        <input type="text" id="fb_name" required placeholder="e.g., Fortunate Osas">
+                    </div>
+
+                    <!-- Optional TikTok handle field -->
+                    <div class="form-group">
+                        <label for="tiktok_name">TikTok Username <span class="optional-tag">(Optional - Boosts Chance)</span></label>
+                        <input type="text" id="tiktok_name" placeholder="e.g., @yourusername">
+                    </div>
+
+                    <!-- Optional Instagram handle field -->
+                    <div class="form-group">
+                        <label for="ig_name">Instagram Username <span class="optional-tag">(Optional - Boosts Chance)</span></label>
+                        <input type="text" id="ig_name" placeholder="e.g., @yourusername">
+                    </div>
+
+                    <button type="submit" class="btn">Verify Entry & Generate Snippet</button>
+                </form>
             </div>
         </section>
 
@@ -939,9 +1012,11 @@
             const userName = document.getElementById('user_name').value;
             const userEmail = document.getElementById('user_email').value;
             const fbUsername = document.getElementById('fb_name').value;
+            const tiktokUsername = document.getElementById('tiktok_name').value.trim() || 'N/A';
+            const igUsername = document.getElementById('ig_name').value.trim() || 'N/A';
             const uniqueCode = generateUniqueCode(8);
 
-            const snippetOutput = `PARTNERSHIP GIVEAWAY ENTRY\n--------------------------\nName: ${userName}\nEmail: ${userEmail}\nFB Profile: ${fbUsername}\nVerification Code: PARTNER-FD-FO-${uniqueCode}\n--------------------------`;
+            const snippetOutput = `PARTNERSHIP GIVEAWAY ENTRY\n--------------------------\nName: ${userName}\nEmail: ${userEmail}\nFB Profile: ${fbUsername}\nTikTok: ${tiktokUsername}\nInstagram: ${igUsername}\nVerification Code: PARTNER-FD-FO-${uniqueCode}\n--------------------------`;
 
             document.getElementById('snippetContainer').innerText = snippetOutput;
             document.getElementById('confirmationModal').style.display = 'flex';

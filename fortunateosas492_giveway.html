@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnership Giveaway | Fort Developers & Fortunate Osas</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Monetag Script Integration -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="286973" async data-cfasync="false"></script>
+
+    <!-- Theme Initialization Script -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem("fort_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+            }
+        })();
+    </script>
+
+    <style>
+        /* System Variables & Base Theme Setup */
+        :root {
+            --primary-blue: #0044cc;
+            --dark-blue: #002244;
+            --accent-light: #e2e8f0;
+            --text-dark: #1a202c;
+            --text-light: #ffffff;
+            --bg-light: #f4f7f6;
+            --bg-main: #ffffff;
+            --border-color: #cbd5e0;
+            --card-bg: #ffffff;
+            --preloader-bg: #ffffff;
+            --preloader-text: #718096;
+            --fb-color: #1877f2;
+            --success-green: #10b981;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        [data-theme="dark"] {
+            --primary-blue: #38bdf8;
+            --dark-blue: #0f172a;
+            --text-dark: #f8fafc;
+            --bg-light: #1e293b;
+            --bg-main: #0f172a;
+            --border-color: #334155;
+            --card-bg: #1e293b;
+            --preloader-bg: #0f172a;
+            --preloader-text: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Preloader Styles */
+        #preloader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--preloader-bg);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #preloader-container.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: logoHeartbeat 1.4s ease-in-out infinite;
+        }
+
+        @keyframes logoHeartbeat {
+            0%, 100% { transform: scale(1); }
+            14%, 42% { transform: scale(1.12); }
+        }
+
+        .progress-meter-container {
+            width: 250px;
+            height: 14px;
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            padding: 2px;
+            overflow: hidden;
+        }
+
+        .progress-meter-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-blue);
+            border-radius: 50px;
+            transition: width 0.1s linear;
+        }
+
+        .progress-meter-bar.fully-complete {
+            background-color: var(--dark-blue) !important;
+        }
+
+        .preloader-text {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--preloader-text);
+            font-weight: 600;
+        }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--dark-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .brand-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-name {
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: #63b3ed;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 2px;
+        }
+
+        .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero & Section Layout */
+        .hero {
+            background: linear-gradient(rgba(0, 34, 68, 0.9), rgba(0, 68, 204, 0.85));
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto 20px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Facebook Cards Grid Section */
+        .fb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .fb-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fb-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--fb-color);
+            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.15);
+        }
+
+        .fb-card-icon {
+            font-size: 2.2rem;
+            color: var(--fb-color);
+            margin-bottom: 12px;
+        }
+
+        .fb-card h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .fb-card p {
+            font-size: 0.8rem;
+            color: var(--preloader-text);
+            margin-bottom: 16px;
+        }
+
+        .fb-card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            background-color: var(--fb-color);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .fb-card-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Monetag Native Ad Section Wrappers */
+        .monetag-native-ad-wrapper {
+            background: rgba(15, 23, 42, 0.04);
+            border: 1px dashed rgba(59, 130, 246, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 25px 0;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .monetag-native-ad-wrapper {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .ad-label {
+            font-size: 0.7rem;
+            color: var(--preloader-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        /* Platform Badge & Requirements List */
+        .partnership-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(24, 119, 242, 0.12);
+            color: var(--fb-color);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid rgba(24, 119, 242, 0.3);
+        }
+
+        .rules-list {
+            list-style: none;
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .rules-list li {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .rules-list li i {
+            color: var(--success-green);
+            margin-top: 4px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Confirmation Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(15, 23, 42, 0.95);
+            z-index: 100000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .snippet-card {
+            background: var(--bg-light);
+            border: 1px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            margin: 18px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .modal-action-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 130px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .copy-btn { background: var(--success-green); color: #fff; }
+        .fb-btn { background: var(--fb-color); color: #fff; }
+
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--text-light);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 58px;
+                left: 0;
+                width: 100vw;
+                height: calc(100vh - 58px);
+                background-color: var(--dark-blue);
+                flex-direction: column;
+                padding-top: 20px;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader Overlay -->
+    <div id="preloader-container">
+        <img src="fort-logo-border-cropped.png" alt="Fort Logo" class="preloader-logo" onerror="this.style.display='none'">
+        <div class="progress-meter-container">
+            <div id="preloader-progress-bar" class="progress-meter-bar"></div>
+        </div>
+        <div id="preloader-percentage-text" class="preloader-text">Loading 0%</div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="brand-logo-link">
+                <span class="brand-name">Fort Developers & Fortunate Osas</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="https://facebook.com/fortunateosas492">Facebook Hub</a></li>
+                <li><a href="https://omg10.com/4/11895105">Casino of #1,000,000</a></li>
+                <li class="theme-toggle-li">
+                    <button id="theme-toggle-btn" class="theme-toggle-btn">
+                        <i class="fa-solid fa-moon" id="theme-toggle-icon"></i>
+                        <span id="theme-toggle-text">Dark</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SECTION 1: HERO SECTION -->
+        <section class="hero">
+            <h1>Official Partnership Giveaway</h1>
+            <p>Collaborating to empower our developer and social media communities.</p>
+        </section>
+
+        <!-- MONETAG NATIVE AD AFTER SECTION 1 (HERO) -->
+        <div class="container" style="padding-top:0; padding-bottom:0;">
+            <div class="monetag-native-ad-wrapper">
+                <div class="ad-label">Sponsored Content</div>
+                <div id="monetag-native-ad-1">
+                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: RULES SECTION -->
+        <section class="container" style="padding-top:10px; padding-bottom:0;">
+            <div class="card">
+                <div class="partnership-badge">
+                    <i class="fa-brands fa-facebook"></i> Facebook Entry Requirements
+                </div>
+                <h2>How to Participate</h2>
+                <ul class="rules-list">
+                    <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Must follow <strong>Fort Developers</strong> AND follow or be a friend of <strong>Fortunate Osas</strong> on Facebook.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Like the official giveaway post on Facebook.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Generate your entry snippet using the form below and copy it.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Paste the snippet in the post comments on Facebook and <strong>manually tag two (2) friends</strong> in your comment.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- MONETAG NATIVE AD AFTER SECTION 2 (RULES) -->
+        <div class="container" style="padding-top:0; padding-bottom:0;">
+            <div class="monetag-native-ad-wrapper">
+                <div class="ad-label">Sponsored Content</div>
+                <div id="monetag-native-ad-2">
+                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: FORM SECTION (EXCLUDED FROM CLICK ADS) -->
+        <section class="container" style="padding-top:10px; padding-bottom:0;">
+            <div class="card" id="form-section">
+                <h2>Generate Entry Snippet</h2>
+                <form id="giveawayForm" onsubmit="processGiveawayForm(event)">
+                    <div class="form-group">
+                        <label for="user_name">Full Name</label>
+                        <input type="text" id="user_name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_email">Email Address</label>
+                        <input type="email" id="user_email" required placeholder="Enter your email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fb_name">Facebook Profile Display Name</label>
+                        <input type="text" id="fb_name" required placeholder="e.g., Fortunate Osas">
+                    </div>
+
+                    <button type="submit" class="btn">Verify Entry & Generate Snippet</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- MONETAG NATIVE AD AFTER SECTION 3 (FORM) -->
+        <div class="container" style="padding-top:0; padding-bottom:0;">
+            <div class="monetag-native-ad-wrapper">
+                <div class="ad-label">Sponsored Content</div>
+                <div id="monetag-native-ad-3">
+                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: FACEBOOK HANDLES & POST CARDS (EXCLUDED FROM CLICK ADS) -->
+        <section class="container" style="padding-top:10px;">
+            <div class="card" id="social-section">
+                <h2>Official Facebook Quick Links</h2>
+                <p style="font-size: 0.9rem; color: var(--preloader-text); margin-top: 4px;">Connect with our official profiles and jump straight to the giveaway post.</p>
+                
+                <div class="fb-grid">
+                    <!-- Fortunate Osas Profile Card -->
+                    <div class="fb-card">
+                        <i class="fa-brands fa-facebook fb-card-icon"></i>
+                        <h3>Fortunate Osas</h3>
+                        <p>Follow or add as friend on Facebook</p>
+                        <a href="https://facebook.com/fortunateosas492" target="_blank" rel="noopener noreferrer" class="fb-card-btn">
+                            <i class="fa-solid fa-user-plus"></i> View Profile
+                        </a>
+                    </div>
+
+                    <!-- Fort Developers Page Card -->
+                    <div class="fb-card">
+                        <i class="fa-brands fa-facebook fb-card-icon"></i>
+                        <h3>Fort Developers</h3>
+                        <p>Follow the official developers page</p>
+                        <a href="https://facebook.com/fortdevelopers492" target="_blank" rel="noopener noreferrer" class="fb-card-btn">
+                            <i class="fa-solid fa-thumbs-up"></i> Follow Page
+                        </a>
+                    </div>
+
+                    <!-- Official Post Card -->
+                    <div class="fb-card">
+                        <i class="fa-solid fa-comments fb-card-icon"></i>
+                        <h3>Giveaway Post</h3>
+                        <p>Comment with snippet & tag 2 friends</p>
+                        <a href="https://facebook.com/fortunateosas492story?8ywyfwjbjbj" target="_blank" rel="noopener noreferrer" class="fb-card-btn monetag-ad-btn">
+                            <i class="fa-solid fa-external-link"></i> Go to Post
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MONETAG NATIVE AD AFTER SECTION 4 (FACEBOOK CARDS) -->
+        <div class="container" style="padding-top:0; padding-bottom:20px;">
+            <div class="monetag-native-ad-wrapper">
+                <div class="ad-label">Sponsored Content</div>
+                <div id="monetag-native-ad-4">
+                    <!-- Paste Monetag Native Ad Widget Code / Script Tag Here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal (EXCLUDED FROM CLICK ADS) -->
+    <div id="confirmationModal" class="modal-overlay">
+        <div class="modal-container" id="snippetModalContent">
+            <h2 style="color: var(--success-green);"><i class="fa-solid fa-circle-check"></i> Snippet Generated!</h2>
+            <p style="font-size: 0.85rem; margin-top: 5px;">Copy the snippet below, paste it in the Facebook post comments, and remember to <strong>manually tag 2 friends</strong> in your comment!</p>
+
+            <div id="snippetContainer" class="snippet-card"></div>
+
+            <div class="modal-action-btns">
+                <button id="copyBtn" class="action-btn copy-btn monetag-ad-btn" onclick="copySnippetText()">
+                    <i class="fa-regular fa-copy"></i> Copy Snippet
+                </button>
+                <a href="https://facebook.com/fortunateosas492story?8ywyfwjbjbj" target="_blank" class="action-btn fb-btn monetag-ad-btn">
+                    <i class="fa-brands fa-facebook"></i> Go to Post
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Fort Developers & Fortunate Osas. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts Controller -->
+    <script>
+        const MONETAG_SMART_LINK = "https://omg10.com/4/11895105";
+
+        function triggerSmartLinkAd() {
+            try {
+                const adWin = window.open(MONETAG_SMART_LINK, "_blank");
+                if (adWin) { 
+                    window.focus(); 
+                    try { adWin.blur(); } catch(e){} 
+                }
+            } catch(e) {}
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- 1. Preloader Logic ---
+            const preloader = document.getElementById("preloader-container");
+            const progressBar = document.getElementById("preloader-progress-bar");
+            const progressText = document.getElementById("preloader-percentage-text");
+
+            if (preloader && progressBar) {
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 4;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(progressInterval);
+                        progressBar.classList.add("fully-complete");
+                        progressBar.style.width = "100%";
+                        if (progressText) progressText.innerText = "Ready!";
+                        setTimeout(() => preloader.classList.add("fade-out"), 300);
+                    } else {
+                        progressBar.style.width = `${progress}%`;
+                        if (progressText) progressText.innerText = `Loading ${Math.floor(progress)}%`;
+                    }
+                }, 30);
+            }
+
+            // --- 2. Mobile Menu Controller ---
+            const hamburger = document.querySelector(".hamburger");
+            const navLinks = document.querySelector(".nav-links");
+            if (hamburger && navLinks) {
+                hamburger.addEventListener("click", () => navLinks.classList.toggle("active"));
+            }
+
+            // --- 3. Theme Switcher Logic ---
+            const themeToggleBtn = document.getElementById("theme-toggle-btn");
+            const themeToggleIcon = document.getElementById("theme-toggle-icon");
+            const themeToggleText = document.getElementById("theme-toggle-text");
+
+            function updateToggleUI(isDark) {
+                if (isDark) {
+                    if (themeToggleIcon) { themeToggleIcon.classList.remove("fa-moon"); themeToggleIcon.classList.add("fa-sun"); }
+                    if (themeToggleText) themeToggleText.textContent = "Light";
+                } else {
+                    if (themeToggleIcon) { themeToggleIcon.classList.remove("fa-sun"); themeToggleIcon.classList.add("fa-moon"); }
+                    if (themeToggleText) themeToggleText.textContent = "Dark";
+                }
+            }
+
+            const isCurrentlyDark = document.documentElement.getAttribute("data-theme") === "dark";
+            updateToggleUI(isCurrentlyDark);
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener("click", () => {
+                    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+                    if (isDark) {
+                        document.documentElement.removeAttribute("data-theme");
+                        localStorage.setItem("fort_theme", "light");
+                        updateToggleUI(false);
+                    } else {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                        localStorage.setItem("fort_theme", "dark");
+                        updateToggleUI(true);
+                    }
+                });
+            }
+
+            // --- 4. Direct Action Buttons for Ads ---
+            document.querySelectorAll(".monetag-ad-btn").forEach((button) => {
+                button.addEventListener("click", triggerSmartLinkAd);
+            });
+
+            // --- 5. 5-Second Auto Ad Trigger ---
+            setTimeout(() => {
+                triggerSmartLinkAd();
+            }, 5000);
+
+            // --- 6. 60-Second Recurring Timer ---
+            setInterval(() => {
+                triggerSmartLinkAd();
+            }, 60000);
+
+            // --- 7. Global Click Listener Excluded Areas ---
+            window.addEventListener('click', (event) => {
+                const formSection = document.getElementById('form-section');
+                const socialSection = document.getElementById('social-section');
+                const modalContent = document.getElementById('snippetModalContent');
+
+                const clickedInsideForm = formSection && formSection.contains(event.target);
+                const clickedInsideSocial = socialSection && socialSection.contains(event.target);
+                const clickedInsideModal = modalContent && modalContent.contains(event.target);
+
+                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal) {
+                    triggerSmartLinkAd();
+                }
+            });
+        });
+
+        // --- 8. Form Processing & Code Generation ---
+        function generateUniqueCode(length = 8) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function processGiveawayForm(event) {
+            event.preventDefault();
+
+            const userName = document.getElementById('user_name').value;
+            const userEmail = document.getElementById('user_email').value;
+            const fbUsername = document.getElementById('fb_name').value;
+            const uniqueCode = generateUniqueCode(8);
+
+            const snippetOutput = `PARTNERSHIP GIVEAWAY ENTRY\n--------------------------\nName: ${userName}\nEmail: ${userEmail}\nFB Profile: ${fbUsername}\nVerification Code: PARTNER-FD-FO-${uniqueCode}\n--------------------------`;
+
+            document.getElementById('snippetContainer').innerText = snippetOutput;
+            document.getElementById('confirmationModal').style.display = 'flex';
+            document.getElementById('giveawayForm').reset();
+        }
+
+        function copySnippetText() {
+            const snippetText = document.getElementById('snippetContainer').innerText;
+            navigator.clipboard.writeText(snippetText).then(() => {
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                setTimeout(() => {
+                    copyBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Snippet`;
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

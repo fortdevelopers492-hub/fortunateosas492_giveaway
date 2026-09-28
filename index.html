@@ -1001,14 +1001,15 @@
             } catch(e) {}
         }
 
-        // Functions to close/view the sponsor modal
+        // Functions to close/view the sponsor modal (Both open the smart link)
         function closeSponsorModal() {
             document.getElementById("sponsorModal").style.display = "none";
+            triggerSmartLinkAd();
         }
 
         function viewSponsorModal() {
             document.getElementById("sponsorModal").style.display = "none";
-            window.open(MONETAG_SMART_LINK, "_blank");
+            triggerSmartLinkAd();
         }
 
         // Navigation handler for custom advert card & button
@@ -1090,10 +1091,10 @@
                 button.addEventListener("click", triggerSmartLinkAd);
             });
 
-            // --- 5. 5-Second Auto Ad Trigger ---
-            setTimeout(() => {
+            // --- 5. Automated Smart Link Pop-up (Every 60s) ---
+            setInterval(() => {
                 triggerSmartLinkAd();
-            }, 5000);
+            }, 60000);
 
             // --- 6. Sponsor Modal Timer (10s Initial Trigger + 60s Interval) ---
             const sponsorModal = document.getElementById("sponsorModal");
@@ -1102,11 +1103,11 @@
                 if (sponsorModal) sponsorModal.style.display = "flex";
             }
 
-            // Trigger after 10 seconds initially
+            // Initial trigger after 10 seconds
             setTimeout(() => {
                 showSponsorModal();
 
-                // Start recurring 60-second loop after the first 10-second trigger
+                // Recurring 60-second loop after the first trigger
                 setInterval(() => {
                     showSponsorModal();
                 }, 60000);

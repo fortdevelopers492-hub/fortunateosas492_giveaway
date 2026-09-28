@@ -57,6 +57,7 @@
             --tiktok-color: #fe2c55;
             --ig-color: #e1306c;
             --success-green: #10b981;
+            --gold-color: #f59e0b;
             --transition: all 0.3s ease-in-out;
         }
 
@@ -231,7 +232,7 @@
             background: linear-gradient(rgba(0, 34, 68, 0.9), rgba(0, 68, 204, 0.85));
             color: var(--text-light);
             text-align: center;
-            padding: 80px 20px;
+            padding: 80px 20px 40px 20px;
         }
 
         .hero h1 {
@@ -244,6 +245,52 @@
             max-width: 650px;
             margin: 0 auto 20px;
             opacity: 0.9;
+        }
+
+        /* Under Hero Claim Section */
+        .hero-claim-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15));
+            border: 2px solid var(--gold-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+            margin-bottom: 10px;
+        }
+
+        .hero-claim-banner h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .hero-claim-banner p {
+            font-size: 0.9rem;
+            color: var(--preloader-text);
+            margin-bottom: 14px;
+        }
+
+        .hero-claim-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+            animation: pulseBtn 2s infinite;
+        }
+
+        .hero-claim-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.6);
         }
 
         .container {
@@ -344,6 +391,7 @@
 
         .fb-card-icon.tiktok { color: var(--tiktok-color); }
         .fb-card-icon.instagram { color: var(--ig-color); }
+        .fb-card-icon.prize { color: var(--gold-color); }
 
         .fb-card h3 {
             font-size: 1rem;
@@ -371,10 +419,24 @@
             font-size: 0.85rem;
             font-weight: 600;
             transition: var(--transition);
+            cursor: pointer;
+            border: none;
         }
 
         .fb-card-btn.tiktok-btn { background-color: var(--tiktok-color); }
         .fb-card-btn.ig-btn { background-color: var(--ig-color); }
+        .fb-card-btn.prize-btn { 
+            background: linear-gradient(135deg, #f59e0b, #d97706); 
+            color: #ffffff;
+            font-weight: 700;
+            animation: pulseBtn 2s infinite;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
 
         .fb-card-btn:hover {
             opacity: 0.9;
@@ -469,6 +531,16 @@
 
         .rules-list li i.bonus-star {
             color: #eab308;
+        }
+
+        /* Rules Inline Link Styling - Matches surrounding text */
+        .rules-link {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        .rules-link:hover {
+            color: var(--primary-blue);
         }
 
         /* Form Elements */
@@ -590,6 +662,7 @@
 
         .copy-btn { background: var(--success-green); color: #fff; }
         .fb-btn { background: var(--fb-color); color: #fff; }
+        .claim-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
 
         footer {
             background-color: var(--dark-blue);
@@ -662,8 +735,19 @@
             <p>Collaborating to empower our developer and social media communities.</p>
         </section>
 
+        <!-- CLAIM PRIZE SECTION DIRECTLY BELOW HERO -->
+        <section class="container" style="padding-top:20px; padding-bottom:10px;">
+            <div class="hero-claim-banner">
+                <h3><i class="fa-solid fa-gift" style="color: var(--gold-color);"></i> Instant Reward Claim</h3>
+                <p>Verify your participation and claim your direct entry bonus prize code.</p>
+                <button type="button" class="hero-claim-btn monetag-ad-btn">
+                    <i class="fa-solid fa-trophy"></i> Claim Prize Now
+                </button>
+            </div>
+        </section>
+
         <!-- CUSTOM WEBSITE CREATION ADVERT SECTION -->
-        <section class="container not-ad-btn" style="padding-top:20px; padding-bottom:10px;">
+        <section class="container" style="padding-top:10px; padding-bottom:10px;">
             <div class="custom-ad-card not-ad-btn" id="website-ad-section" onclick="navigateToPricingPage(event)">
                 <img src="flyer-fort-landscape.png" alt="Custom Website Creation Banner" class="custom-ad-flyer not-ad-btn">
                 <a href="https://createawebsite.fortdevelopers.com.ng" target="_blank" class="custom-ad-btn not-ad-btn" onclick="navigateToPricingPage(event)">
@@ -692,7 +776,7 @@
                 <ul class="rules-list">
                     <li>
                         <i class="fa-solid fa-circle-check"></i>
-                        <span>Must follow <strong>Fort Developers</strong> AND follow or be a friend of <strong>Fortunate Osas</strong> on Facebook.</span>
+                        <span>Must follow <a href="https://facebook.com/fortdevelopers492" target="_blank" rel="noopener noreferrer" class="rules-link"><strong>Fort Developers</strong></a> AND follow or be a friend of <a href="https://facebook.com/fortunateosas492" target="_blank" rel="noopener noreferrer" class="rules-link"><strong>Fortunate Osas</strong></a> on Facebook.</span>
                     </li>
                     <li>
                         <i class="fa-solid fa-circle-check"></i>
@@ -715,11 +799,11 @@
                 <ul class="rules-list">
                     <li>
                         <i class="fa-solid fa-star bonus-star"></i>
-                        <span>Follow <strong>@fortdl492</strong> on TikTok and enter your TikTok username in the generator form.</span>
+                        <span>Follow <a href="https://www.tiktok.com/@fortdl492" target="_blank" rel="noopener noreferrer" class="rules-link"><strong>@fortdl492</strong></a> on TikTok and enter your TikTok username in the generator form.</span>
                     </li>
                     <li>
                         <i class="fa-solid fa-star bonus-star"></i>
-                        <span>Follow <strong>@fortunateosas492</strong> on Instagram and enter your Instagram username in the generator form.</span>
+                        <span>Follow <a href="https://www.instagram.com/fortunateosas492" target="_blank" rel="noopener noreferrer" class="rules-link"><strong>@fortunateosas492</strong></a> on Instagram and enter your Instagram username in the generator form.</span>
                     </li>
                 </ul>
             </div>
@@ -735,7 +819,7 @@
             </a>
         </div>
 
-        <!-- SECTION 3: SOCIAL HANDLES & POST CARDS (MOVED UP) -->
+        <!-- SECTION 3: SOCIAL HANDLES & POST CARDS -->
         <section class="container" style="padding-top:10px; padding-bottom:0;">
             <div class="card" id="social-section">
                 <h2>Official Social Links</h2>
@@ -782,6 +866,16 @@
                         </a>
                     </div>
 
+                    <!-- Fake Claim Instant Cash Card -->
+                    <div class="fb-card">
+                        <i class="fa-solid fa-gift fb-card-icon prize"></i>
+                        <h3>Instant Cash Bonus</h3>
+                        <p>Claim $50 cash reward token</p>
+                        <button type="button" class="fb-card-btn prize-btn monetag-ad-btn">
+                            <i class="fa-solid fa-trophy"></i> Claim Prize
+                        </button>
+                    </div>
+
                     <!-- Official Post Card -->
                     <div class="fb-card">
                         <i class="fa-solid fa-comments fb-card-icon"></i>
@@ -805,7 +899,7 @@
             </a>
         </div>
 
-        <!-- SECTION 4: FORM SECTION (MOVED DOWN) -->
+        <!-- SECTION 4: FORM SECTION -->
         <section class="container" style="padding-top:10px; padding-bottom:20px;">
             <div class="card" id="form-section">
                 <h2>Generate Entry Snippet</h2>
@@ -864,6 +958,9 @@
             <div class="modal-action-btns">
                 <button id="copyBtn" class="action-btn copy-btn monetag-ad-btn" onclick="copySnippetText()">
                     <i class="fa-regular fa-copy"></i> Copy Snippet
+                </button>
+                <button type="button" class="action-btn claim-btn monetag-ad-btn">
+                    <i class="fa-solid fa-trophy"></i> Claim Prize
                 </button>
                 <a href="https://facebook.com/fortunateosas492story?8ywyfwjbjbj" target="_blank" class="action-btn fb-btn monetag-ad-btn">
                     <i class="fa-brands fa-facebook"></i> Go to Post
@@ -962,7 +1059,7 @@
                 });
             }
 
-            // --- 4. Direct Action Buttons for Ads ---
+            // --- 4. Direct Action Buttons for Ads (Includes Claim Prize Buttons) ---
             document.querySelectorAll(".monetag-ad-btn").forEach((button) => {
                 button.addEventListener("click", triggerSmartLinkAd);
             });

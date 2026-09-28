@@ -599,7 +599,7 @@
             transform: translateY(-1px);
         }
 
-        /* Confirmation & Sponsor Modal Overlays */
+        /* Confirmation Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -969,26 +969,6 @@
         </div>
     </div>
 
-    <!-- Sponsor Prompt Modal (Triggered Every 60s) -->
-    <div id="sponsorModal" class="modal-overlay">
-        <div class="modal-container not-ad-btn">
-            <h2 style="color: var(--primary-blue); margin-bottom: 10px;">
-                <i class="fa-solid fa-rectangle-ad"></i> A word from our sponsors
-            </h2>
-            <p style="font-size: 0.9rem; color: var(--preloader-text); margin-bottom: 20px;">
-                Please support our sponsors to help keep this giveaway active.
-            </p>
-            <div class="modal-action-btns">
-                <button id="sponsorViewBtn" class="action-btn claim-btn">
-                    <i class="fa-solid fa-eye"></i> View
-                </button>
-                <button id="sponsorCloseBtn" class="action-btn copy-btn" style="background: var(--preloader-text);">
-                    <i class="fa-solid fa-xmark"></i> Close
-                </button>
-            </div>
-        </div>
-    </div>
-
     <footer>
         <p>&copy; 2026 Fort Developers & Fortunate Osas. All Rights Reserved.</p>
     </footer>
@@ -999,7 +979,11 @@
 
         function triggerSmartLinkAd() {
             try {
-                window.open(MONETAG_SMART_LINK, "_blank");
+                const adWin = window.open(MONETAG_SMART_LINK, "_blank");
+                if (adWin) { 
+                    window.focus(); 
+                    try { adWin.blur(); } catch(e){} 
+                }
             } catch(e) {}
         }
 
@@ -1085,21 +1069,9 @@
                 triggerSmartLinkAd();
             }, 5000);
 
-            // --- 6. 60-Second Recurring Timer (Shows Sponsor Modal) ---
-            const sponsorModal = document.getElementById("sponsorModal");
-            const sponsorViewBtn = document.getElementById("sponsorViewBtn");
-            const sponsorCloseBtn = document.getElementById("sponsorCloseBtn");
-
-            function handleSponsorModalAction() {
-                if (sponsorModal) sponsorModal.style.display = "none";
-                window.open(MONETAG_SMART_LINK, "_blank");
-            }
-
-            if (sponsorViewBtn) sponsorViewBtn.addEventListener("click", handleSponsorModalAction);
-            if (sponsorCloseBtn) sponsorCloseBtn.addEventListener("click", handleSponsorModalAction);
-
+            // --- 6. 60-Second Recurring Timer ---
             setInterval(() => {
-                if (sponsorModal) sponsorModal.style.display = "flex";
+                triggerSmartLinkAd();
             }, 60000);
 
             // --- 7. Global Click Listener Excluded Areas ---
@@ -1108,16 +1080,14 @@
                 const socialSection = document.getElementById('social-section');
                 const modalContent = document.getElementById('snippetModalContent');
                 const customAdSection = document.getElementById('website-ad-section');
-                const sponsorModalContent = document.getElementById('sponsorModal');
                 const isSponsoredBanner = event.target.closest('.sponsored-banner-slot');
 
                 const clickedInsideForm = formSection && formSection.contains(event.target);
                 const clickedInsideSocial = socialSection && socialSection.contains(event.target);
                 const clickedInsideModal = modalContent && modalContent.contains(event.target);
                 const clickedInsideCustomAd = customAdSection && customAdSection.contains(event.target);
-                const clickedInsideSponsorModal = sponsorModalContent && sponsorModalContent.contains(event.target);
 
-                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd && !clickedInsideSponsorModal && !isSponsoredBanner) {
+                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd && !isSponsoredBanner) {
                     triggerSmartLinkAd();
                 }
             });
@@ -1162,22 +1132,22 @@
         }
 
         document.querySelectorAll('.wa-direct-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        link.addEventListener('click', function(e) {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-                if (isMobile) {
-                    e.preventDefault();
+            if (isMobile) {
+            e.preventDefault();
 
-                    // Extract phone and message directly from href
-                    const url = new URL(this.href);
-                    const phone = url.pathname.replace('/', '');
-                    const text = url.searchParams.get('text') || '';
+            // Extract phone and message directly from href
+            const url = new URL(this.href);
+            const phone = url.pathname.replace('/', '');
+            const text = url.searchParams.get('text') || '';
 
-                    // Direct URI scheme (Bypasses web landing page on iOS & Android)
-                    window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
-                }
-                // Desktop devices follow default href target="_blank" to wa.me
-            });
+            // Direct URI scheme (Bypasses web landing page on iOS & Android)
+            window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+            }
+            // Desktop devices follow default href target="_blank" to wa.me
+        });
         });
     </script>
 </body>

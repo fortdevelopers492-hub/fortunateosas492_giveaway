@@ -12,18 +12,15 @@
     <!-- Monetag Script Integration -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="287798" async data-cfasync="false"></script>
 
-    <!-- Interceptor Script: Block ads for elements marked with .not-ad-btn -->
+    <!-- Interceptor Script: Prevents ad pops without blocking button clicks -->
     <script>
     (function() {
         window.addEventListener('click', function(event) {
-        // Check if the click happened inside an element marked as 'not-ad-btn'
-        const isBlockedElement = event.target.closest('.not-ad-btn');
-
-        if (isBlockedElement) {
-            // Kills Monetag's global click listener before it fires
-            event.stopImmediatePropagation();
-        }
-        }, true); // 'true' runs this during the capture phase before Monetag catches it
+            const isBlockedElement = event.target.closest('.not-ad-btn');
+            if (isBlockedElement) {
+                event.stopPropagation();
+            }
+        }, true);
     })();
     </script>
 
@@ -533,7 +530,6 @@
             color: #eab308;
         }
 
-        /* Rules Inline Link Styling - Matches surrounding text */
         .rules-link {
             color: inherit;
             text-decoration: underline;
@@ -599,7 +595,7 @@
             transform: translateY(-1px);
         }
 
-        /* Confirmation Modal Overlay */
+        /* Confirmation & Sponsor Modal Overlays */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -622,6 +618,8 @@
             max-width: 500px;
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 100001;
         }
 
         .snippet-card {
@@ -947,7 +945,7 @@
         </div>
     </main>
 
-    <!-- Confirmation Modal (EXCLUDED FROM CLICK ADS) -->
+    <!-- Confirmation Modal -->
     <div id="confirmationModal" class="modal-overlay">
         <div class="modal-container" id="snippetModalContent">
             <h2 style="color: var(--success-green);"><i class="fa-solid fa-circle-check"></i> Snippet Generated!</h2>
@@ -969,6 +967,26 @@
         </div>
     </div>
 
+    <!-- Sponsor Prompt Modal -->
+    <div id="sponsorModal" class="modal-overlay">
+        <div class="modal-container">
+            <h2 style="color: var(--primary-blue); margin-bottom: 10px;">
+                <i class="fa-solid fa-rectangle-ad"></i> A word from our sponsors
+            </h2>
+            <p style="font-size: 0.9rem; color: var(--preloader-text); margin-bottom: 20px;">
+                Please support our sponsors to help keep this giveaway active.
+            </p>
+            <div class="modal-action-btns">
+                <button type="button" id="sponsorViewBtn" class="action-btn claim-btn" onclick="viewSponsorModal()">
+                    <i class="fa-solid fa-eye"></i> View
+                </button>
+                <button type="button" id="sponsorCloseBtn" class="action-btn copy-btn" style="background: var(--preloader-text);" onclick="closeSponsorModal()">
+                    <i class="fa-solid fa-xmark"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Fort Developers & Fortunate Osas. All Rights Reserved.</p>
     </footer>
@@ -979,18 +997,26 @@
 
         function triggerSmartLinkAd() {
             try {
-                const adWin = window.open(MONETAG_SMART_LINK, "_blank");
-                if (adWin) { 
-                    window.focus(); 
-                    try { adWin.blur(); } catch(e){} 
-                }
+                window.open(MONETAG_SMART_LINK, "_blank");
             } catch(e) {}
         }
 
-        // Dedicated navigation handler for the custom advert card & button
+        // Functions to close/view the sponsor modal
+        function closeSponsorModal() {
+            document.getElementById("sponsorModal").style.display = "none";
+        }
+
+        function viewSponsorModal() {
+            document.getElementById("sponsorModal").style.display = "none";
+            window.open(MONETAG_SMART_LINK, "_blank");
+        }
+
+        // Navigation handler for custom advert card & button
         function navigateToPricingPage(event) {
-            event.preventDefault();
-            event.stopPropagation(); // Avoid triggering double click listeners
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             triggerSmartLinkAd();
             window.location.href = "https://createawebsite.fortdevelopers.com.ng";
         }
@@ -1059,7 +1085,7 @@
                 });
             }
 
-            // --- 4. Direct Action Buttons for Ads (Includes Claim Prize Buttons) ---
+            // --- 4. Direct Action Buttons for Ads ---
             document.querySelectorAll(".monetag-ad-btn").forEach((button) => {
                 button.addEventListener("click", triggerSmartLinkAd);
             });
@@ -1069,10 +1095,22 @@
                 triggerSmartLinkAd();
             }, 5000);
 
-            // --- 6. 60-Second Recurring Timer ---
-            setInterval(() => {
-                triggerSmartLinkAd();
-            }, 60000);
+            // --- 6. Sponsor Modal Timer (10s Initial Trigger + 60s Interval) ---
+            const sponsorModal = document.getElementById("sponsorModal");
+
+            function showSponsorModal() {
+                if (sponsorModal) sponsorModal.style.display = "flex";
+            }
+
+            // Trigger after 10 seconds initially
+            setTimeout(() => {
+                showSponsorModal();
+
+                // Start recurring 60-second loop after the first 10-second trigger
+                setInterval(() => {
+                    showSponsorModal();
+                }, 60000);
+            }, 10000);
 
             // --- 7. Global Click Listener Excluded Areas ---
             window.addEventListener('click', (event) => {
@@ -1080,14 +1118,16 @@
                 const socialSection = document.getElementById('social-section');
                 const modalContent = document.getElementById('snippetModalContent');
                 const customAdSection = document.getElementById('website-ad-section');
+                const sponsorModalContent = document.getElementById('sponsorModal');
                 const isSponsoredBanner = event.target.closest('.sponsored-banner-slot');
 
                 const clickedInsideForm = formSection && formSection.contains(event.target);
                 const clickedInsideSocial = socialSection && socialSection.contains(event.target);
                 const clickedInsideModal = modalContent && modalContent.contains(event.target);
                 const clickedInsideCustomAd = customAdSection && customAdSection.contains(event.target);
+                const clickedInsideSponsorModal = sponsorModalContent && sponsorModalContent.contains(event.target);
 
-                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd && !isSponsoredBanner) {
+                if (!clickedInsideForm && !clickedInsideSocial && !clickedInsideModal && !clickedInsideCustomAd && !clickedInsideSponsorModal && !isSponsoredBanner) {
                     triggerSmartLinkAd();
                 }
             });
@@ -1132,22 +1172,19 @@
         }
 
         document.querySelectorAll('.wa-direct-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            link.addEventListener('click', function(e) {
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-            if (isMobile) {
-            e.preventDefault();
+                if (isMobile) {
+                    e.preventDefault();
 
-            // Extract phone and message directly from href
-            const url = new URL(this.href);
-            const phone = url.pathname.replace('/', '');
-            const text = url.searchParams.get('text') || '';
+                    const url = new URL(this.href);
+                    const phone = url.pathname.replace('/', '');
+                    const text = url.searchParams.get('text') || '';
 
-            // Direct URI scheme (Bypasses web landing page on iOS & Android)
-            window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
-            }
-            // Desktop devices follow default href target="_blank" to wa.me
-        });
+                    window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+                }
+            });
         });
     </script>
 </body>
